@@ -15,6 +15,74 @@ public:
 	}
 };
 
+void makeCycle(node *&head, int pos) // make a cycle in any linked list by this function pos is that position from where loop will start.
+{
+	node *temp = head;
+	node *startNode;
+
+	int count = 1;
+	while (temp->next != NULL)
+	{
+		if (count == pos)
+		{
+			startNode = temp;
+		}
+		temp = temp->next;
+		count++;
+	}
+
+	temp->next = startNode;
+}
+
+bool detectCycle(node *&head) // this function detect that our linked list has cycle or not.
+{
+	node *slow = head;
+	node *fast = head;
+
+	while (fast != NULL && fast->next != NULL)
+	{
+		slow = slow->next;
+		fast = fast->next->next;
+
+		if (fast == slow)
+		{
+			return true;
+		}
+
+		return false;
+	}
+}
+
+void remove(node *&head)
+{
+
+	node *slow = head;
+	node *fast = head;
+
+	do
+	{
+		slow = slow->next;
+		fast = fast->next->next;
+
+	} while (slow != fast);
+
+	fast = head;
+	while (slow->next != fast->next)
+	{
+		slow = slow->next;
+		fast = fast->next;
+	}
+
+	slow->next = NULL;
+}
+
+void reverse(node *&head)
+{
+	node *pre = NULL;
+	node *current = head;
+	node *nex;
+}
+
 void deletHead(node *&head)
 {
 	node *todelete = head;
@@ -80,14 +148,22 @@ int main()
 {
 	node *head = NULL;
 	insertAttail(head, 1);
-	insertAttail(head, 6);
-	insertAttail(head, 8);
+	insertAttail(head, 2);
 	insertAttail(head, 3);
-	display(head);
-	delet(head, 8);
-	display(head);
+	insertAttail(head, 4);
+	insertAttail(head, 5);
+	insertAttail(head, 6);
+	// display(head);
+	// delet(head, 8);
+	// display(head);
 	// deletHead(head);
 	// display(head);
+	makeCycle(head,3);
+	cout<<detectCycle(head)<<endl;
+	remove(head);
+	cout<<detectCycle(head)<<endl;
+	display(head);
+
 
 	return 0;
 }
