@@ -7,7 +7,7 @@ struct node
     int data;
 };
 
-void traverse(struct node *head)
+void traverse(struct node *head) 
 {
     struct node *t = head;
     if (t == NULL)
