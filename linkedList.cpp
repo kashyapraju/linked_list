@@ -81,6 +81,44 @@ void reverse(node *&head)
 	node *pre = NULL;
 	node *current = head;
 	node *nex;
+
+ while(current!=NULL)
+	{
+	    nex=current->next;
+	    current->next=pre;
+	    
+	    pre=current;
+	    current=nex;
+	    
+	    
+	}
+
+	return pre;
+}
+
+node* reversek(node* &head, int k)// if we want reverse k nodes together
+{
+    node* prevptr=NULL;
+    node* currptr=head;
+    node* nextptr;
+    
+    int count = 0;
+    
+    while(currptr!NULL && count<k)// firstly we reverse k nodes 
+    {
+        nextptr=currptr->next;
+        currptr->next=prevptr;
+        prevptr=currptr;
+        currptr=nextptr;
+        count++;
+    }
+    
+    if(nextptr!NULL)
+    {
+        head->next=reversek(nextptr,k);//now point the node which is frount of k node to the head means 1 node in case of k = 2
+      
+    }
+    return prevptr;
 }
 
 void deletHead(node *&head)
@@ -153,7 +191,13 @@ int main()
 	insertAttail(head, 4);
 	insertAttail(head, 5);
 	insertAttail(head, 6);
-	// display(head);
+	display(head);
+	
+         int k = 2;
+	
+	node* newhead= reversek(head,k);
+	display(newhead);
+	
 	// delet(head, 8);
 	// display(head);
 	// deletHead(head);
