@@ -16,6 +16,41 @@ public:
     }
 };
 
+void delethead(node* &head)
+{
+    node* todelete=head;
+    head=head->next;
+    head->prev=NULL;
+    delete todelete;
+}
+
+void deletion(node* &head, inr pos)
+{
+    if(pos==1)
+    {
+        delethead(head);
+        return;
+    }
+    
+    node* temp=head;
+    int count = 1;
+
+    while(temp!=NULL && count!=pos)
+        {
+
+           temp=temp->next;
+            count++;
+        }
+
+    temp->prev->next=temp->next;
+    if(temp->next!=NULL)
+    {
+    temp->next->prev=temp->prev;   
+    }
+
+    delet temp;
+}
+
 void insertAtHead(node *&head, int val)
 {
     node *n = new node(val);
@@ -68,6 +103,9 @@ int main()
     display(head);
     insertAtTail(head, 5);
     display(head);
+    deletion(head,5);
+     display(head);
+    
 
     return 0;
 }
