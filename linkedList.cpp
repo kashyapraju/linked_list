@@ -34,7 +34,7 @@ void makeCycle(node *&head, int pos) // make a cycle in any linked list by this 
 	temp->next = startNode;
 }
 
-bool detectCycle(node *&head) // this function detect that our linked list has cycle or not.
+bool detectCycle(node *&head) // this function detect that our linked list has cycle or not. floyd's algo, hare and tortoise algo
 {
 	node *slow = head;
 	node *fast = head;
